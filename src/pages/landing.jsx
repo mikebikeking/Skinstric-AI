@@ -2,15 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import buttonIcon from "../assets/button-icon-shrunk.png";
 import buttonIconFlip from "../assets/button-icon-shrunk-flip.png";
-import Nav from "./nav";
+import Nav from "../components/nav";
 
-const LandingPage = () => {
+const Landing = () => {
   return (
     <>
-    <Nav />
+      <Nav />
       <div className="landing">
         <div className="rectangle__left">
-          <Link to="/discover" className="lan__btn">
+          <Link to="#" className="lan__btn">
             <span>
               <img src={buttonIcon} className="btn__icon" alt="Discover AI" />
               Discover A.I.
@@ -22,7 +22,7 @@ const LandingPage = () => {
           <br /> skincare
         </h1>
         <div className="rectangle__right">
-          <Link to="/analysis" className="lan__btn"> 
+          <Link to="/analysis" className="lan__btn">
             <span>
               Take Test
               <img src={buttonIconFlip} className="btn__icon" alt="Take Test" />
@@ -40,4 +40,4 @@ const LandingPage = () => {
   );
 };
 
-export default LandingPage;
+export default Landing;
