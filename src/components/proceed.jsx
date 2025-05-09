@@ -1,17 +1,20 @@
 import React from "react";
 import buttonIcon from "../assets/button-icon-shrunk-flip.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
-function proceed() {
+function Proceed() {
+  const location = useLocation();
+  const navigateTo = location.pathname === "/analysis" ? "/results" : "/select";
+
   return (
     <div className="proceed__container">
-      <Link to="/results">
+      <Link to={navigateTo}>
         <div className="proceed__display">
-         Proceed<img src={buttonIcon} className="btn__icon" alt="Proceed"/>
+          Proceed<img src={buttonIcon} className="btn__icon" alt="Proceed" />
         </div>
       </Link>
     </div>
   );
 }
 
-export default proceed;
+export default Proceed;

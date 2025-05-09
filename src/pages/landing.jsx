@@ -4,7 +4,7 @@ import buttonIcon from "../assets/button-icon-shrunk.png";
 import buttonIconFlip from "../assets/button-icon-shrunk-flip.png";
 import Nav from "../components/nav";
 
-const Landing = () => {
+function Landing () {
   return (
     <>
       <Nav />

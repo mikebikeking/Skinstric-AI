@@ -259,3 +259,12 @@
   font-size: 1.2em;
   margin-bottom: 10px;
 }
+
+.ai__home {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  height: 100vh; 
+  gap: 10%; 
+}
+

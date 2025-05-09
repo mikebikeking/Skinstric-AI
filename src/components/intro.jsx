@@ -3,7 +3,7 @@ import Back from "./back";
 import axios from "axios";
 import Proceed from "./proceed";
 
-const Intro = () => {
+function Intro () {
   const [step, setStep] = useState("name");
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
@@ -16,7 +16,7 @@ const Intro = () => {
 
   useEffect(() => {
     if (step === "location") {
-      setPrompt("Enter Your Location");
+      setPrompt("Where are you from?");
       setCanSubmit(true);
     } else {
       setPrompt("Introduce Yourself");

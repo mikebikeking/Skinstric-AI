@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const Nav = () => {
+function Nav(){
   return (
     <div className="nav__header">
       <div className="nav__left">
