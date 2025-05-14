@@ -3,11 +3,13 @@ import gallery from "../assets/gallery-icon.png";
 import shutter from "../assets/shutter-icon.png";
 import Nav from "../components/nav";
 import Back from "../components/back";
-import Proceed from "../components/proceed";
+import Proceedapi from "../components/proceedapi";
+import { useNavigate } from 'react-router-dom';
 
 function Results() {
   const fileInputRef = useRef(null);
   const [base64Image, setBase64Image] = useState(null);
+  const navigate = useNavigate();
 
   const handleGalleryClick = () => {
     fileInputRef.current.click();
@@ -24,7 +26,7 @@ function Results() {
     const reader = new FileReader();
     reader.onloadend = () => {
       setBase64Image(reader.result);
-      callSkinstricAPI(reader.result);
+      console.log("Base64 Image set:", reader.result ? "Yes" : "No");
     };
     reader.readAsDataURL(file);
   };
@@ -49,12 +51,15 @@ function Results() {
 
       const data = await response.json();
       console.log(data);
+      localStorage.setItem('skinstricApiResponse', JSON.stringify(data));
+      navigate('/demographics');
     } catch (error) {
       console.error("Error calling Skinstric API:", error);
     }
   };
 
   const handleProceedClick = () => {
+    console.log("Proceed button clicked");
     if (base64Image) {
       callSkinstricAPI(base64Image);
     } else {
@@ -89,7 +94,7 @@ function Results() {
       )}
       <div className="navigation__bottom">
         <Back />
-        {base64Image && <Proceed onClick={handleProceedClick} />}
+        {base64Image && <Proceedapi onClick={handleProceedClick} />}
       </div>
       <input
         type="file"

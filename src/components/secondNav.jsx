@@ -2,18 +2,17 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 
-function Nav(){
+function secondNav(){
   return (
     <div className="nav__header">
       <div className="nav__left">
-        <Link to="/">
+      <Link to="/">
         <h1 className="nav__title">SKINSTRIC</h1>
         </Link>
-        <button className="nav__btn">[ INTRO ]</button>
+        <button className="nav__btn">[ ANALYSIS ]</button>
       </div>
-      <button className="nav__btn--code">ENTER CODE</button>
     </div>
   );
 };
 
-export default Nav;
+export default secondNav;
