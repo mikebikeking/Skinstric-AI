@@ -1,15 +1,64 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import gallery from "../assets/gallery-icon.png";
 import shutter from "../assets/shutter-icon.png";
 import Nav from "../components/nav";
 import Back from "../components/back";
 import Proceedapi from "../components/proceedapi";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+
+function CameraPage() {
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    async function enableCamera() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: true,
+        });
+        if (videoRef.current) {
+          videoRef.current.srcObject = stream;
+        }
+      } catch (error) {
+        console.error("Error accessing camera on camera page:", error);
+      }
+    }
+
+    enableCamera();
+
+    return () => {
+      if (videoRef.current && videoRef.current.srcObject) {
+        const stream = videoRef.current.srcObject;
+        stream.getTracks().forEach((track) => track.stop());
+      }
+    };
+  }, []);
+
+  return (
+    <div>
+      <Nav />
+      <h2>Camera View</h2>
+      <video ref={videoRef} width="400" height="300" autoPlay />{" "}
+    </div>
+  );
+}
 
 function Results() {
+  const navigate = useNavigate();
+
+  const handleShutterClick = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      stream.getTracks().forEach((track) => track.stop());
+      navigate("/camera");
+    } catch (error) {
+      console.error("Error accessing camera:", error);
+      alert("Camera access denied. Please check your browser permissions.");
+    }
+  };
+
   const fileInputRef = useRef(null);
   const [base64Image, setBase64Image] = useState(null);
-  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleGalleryClick = () => {
     fileInputRef.current.click();
@@ -32,6 +81,7 @@ function Results() {
   };
 
   const callSkinstricAPI = async (base64Data) => {
+    setIsLoading(true);
     try {
       const response = await fetch(
         "https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseTwo",
@@ -46,15 +96,18 @@ function Results() {
 
       if (!response.ok) {
         console.error(`HTTP error! status: ${response.status}`);
+        setIsLoading(false);
         return;
       }
 
       const data = await response.json();
       console.log(data);
-      localStorage.setItem('skinstricApiResponse', JSON.stringify(data));
-      navigate('/demographics');
+      localStorage.setItem("skinstricApiResponse", JSON.stringify(data));
+      setIsLoading(false);
+      navigate("/demographics");
     } catch (error) {
       console.error("Error calling Skinstric API:", error);
+      setIsLoading(false);
     }
   };
 
@@ -69,11 +122,16 @@ function Results() {
 
   return (
     <>
-      <Nav />
-      <p className="bold nav__p">To Start Analysis</p>
+      <Nav /> <p className="bold nav__p">To Start Analysis</p>{" "}
       <div className="ai__home">
-        Allow A.I. to scan your face
-        <img src={shutter} className="shutter" alt="Shutter" />
+        Allow A.I. to scan your face{" "}
+        <img
+          src={shutter}
+          className="shutter"
+          alt="Shutter"
+          onClick={handleShutterClick}
+          style={{ cursor: "pointer" }}
+        />{" "}
         <img
           src={gallery}
           className="gallery"
@@ -81,28 +139,33 @@ function Results() {
           onClick={handleGalleryClick}
           style={{ cursor: "pointer" }}
         />
-        Allow A.I. access to gallery
-      </div>
+        Allow A.I. access to gallery{" "}
+      </div>{" "}
       {base64Image && (
         <div>
+          {" "}
           <img
             src={base64Image}
             alt="Uploaded Preview"
             style={{ maxWidth: "200px" }}
-          />
+          />{" "}
         </div>
-      )}
+      )}{" "}
+      {isLoading && (
+        <div className="loading-overlay">
+          <div className="loading-text">Loading...</div>{" "}
+        </div>
+      )}{" "}
       <div className="navigation__bottom">
-        <Back />
-        {base64Image && <Proceedapi onClick={handleProceedClick} />}
-      </div>
+        <Back /> {base64Image && <Proceedapi onClick={handleProceedClick} />}{" "}
+      </div>{" "}
       <input
         type="file"
         accept="image/*"
         ref={fileInputRef}
         style={{ display: "none" }}
         onChange={handleFileChange}
-      />
+      />{" "}
     </>
   );
 }

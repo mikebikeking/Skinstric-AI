@@ -239,11 +239,13 @@
   align-items: flex-end;
   width: 100%;
   padding: 20px 32px;
+  position: relative;
 }
 
 .proceed__display {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .submission__message {
@@ -338,18 +340,27 @@
   order: 4;
 }
 
-
-
 .dem__header {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  padding-left: 28px;
+  margin-top: auto;
+  text-align: left;
+  font-size: 24px;
 }
 
 .dem__container {
   display: flex;
   justify-content: center;
+}
+
+.dem__button {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(243, 244, 246);
+  padding: 36px;
+  margin: 12px;
+  border-radius: 12px;
 }
 
 .dem__buttons {
@@ -358,19 +369,160 @@
   gap: 10px;
   align-items: center;
   background-color: rgb(243, 244, 246);
-  padding: 48px;
+  padding: 16px;
   border-radius: 12px;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
+  margin: 12px;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
-.graph__container {
-  padding: 36px;
-  background-color: rgb(243, 244, 246);
+.dem__buttons.active {
+  background-color: black;
+  color: white;
 }
 
-.chart__container {
+.button__text {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+}
+
+.dem__graph {
   padding: 36px;
   background-color: rgb(243, 244, 246);
+  border-radius: 12px;
+  margin: 12px;
+  text-transform: capitalize;
+}
+
+.graph__text {
+  align-items: end;
+  color: #a0a4ab;
+}
+
+.circular__progress--card {
+  background-color: #f3f4f6;
+  padding: 16px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.circular__progress--wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 1 / 1;
+  margin-bottom: 16px;
+}
+
+.circular__progress--svg {
+  width: 100%;
+  height: 100%;
+}
+
+.circular__progress--bg {
+  color: #e5e7eb;
+}
+
+.circular__progress--bar {
+  color: #000;
+}
+
+.circular__progress--text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.percentage {
+  font-size: 1.875rem;
+  font-weight: bold;
+}
+
+.label__primary {
+  font-size: 0.875rem;
+  color: #4b5563;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.label__secondary {
+  font-size: 0.75rem;
+  color: #4b5563;
+  text-align: center;
+}
+
+.dem__percent {
+  padding: 36px;
+  background-color: rgb(243, 244, 246);
+  border-radius: 12px;
+  margin: 12px;
+  text-transform: capitalize;
+  word-spacing: 15px;
+  flex-basis: 20%;
+}
+
+.dem__percent-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.dem__percent > ul.percent__data {
+  word-spacing: normal;
+}
+
+.confidence__label--header {
+  font-weight: bold;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 8px;
+  word-spacing: px;
+}
+
+.confidence__label--header {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.percent__data {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.percent__data li {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.percent__data li span:last-child {
+  margin-left: 20px;
+}
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.loading-text {
+  font-size: 1.5em;
+  color: #333;
 }

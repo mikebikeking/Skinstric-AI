@@ -5,6 +5,7 @@ import Analysis from "./pages/analysis";
 import Results from "./pages/results";
 import Select from "./pages/select";
 import Demographics from "./pages/demographics";
+import Camera from "./components/camera";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/results" element={<Results />} />
           <Route path="/select" element={<Select />} />
           <Route path="/demographics" element={<Demographics />} />
+          <Route path="/camera" element={<Camera />} />
         </Routes>
       </>
     </Router>
