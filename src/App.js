@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Landing from "./pages/landing";
 import Analysis from "./pages/analysis";
@@ -7,7 +7,10 @@ import Select from "./pages/select";
 import Demographics from "./pages/demographics";
 import Camera from "./components/camera";
 
+
 function App() {
+ 
+
   return (
     <Router>
       <>

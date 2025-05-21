@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import Back from "./back";
 import axios from "axios";
 import Proceed from "./proceed";
+import { Link } from "react-router-dom";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 function Intro () {
   const [step, setStep] = useState("name");
@@ -26,6 +29,15 @@ function Intro () {
     setNameError("");
     setLocationError("");
   }, [step]);
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      easing: 'ease-in-out',
+      once: true,
+      offset: 0,
+    });
+  }, []);
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
@@ -89,21 +101,23 @@ function Intro () {
 
   return (
     <>
-      <div className="nav__header">
+      <div className="nav__header" data-aos="fade-in">
         <div className="nav__left">
-          <h1 className="nav__title">SKINSTRIC</h1>
+          <Link to="/">
+            <h1 className="nav__title">SKINSTRIC</h1>
+          </Link>
           <button className="nav__btn">[ INTRO ]</button>
         </div>
       </div>
       {submissionSuccess ? (
-        <div className="submission__message">
+        <div className="submission__message" >
           <p className="bold">Thank you for submitting!</p>
           <p>Ready for the result? Process for the next Step</p>
         </div>
       ) : (
         <>
-          <p className="bold nav__p">To Start Analysis</p>
-          <div className="input">
+          <p className="bold nav__p" data-aos="fade-in">To Start Analysis</p>
+          <div className="input" data-aos="fade-in">
             <div className="intro__container">
               <div className="rectangle__intro">
                 <div className="intro__text">
@@ -116,6 +130,7 @@ function Intro () {
                     value={inputValue}
                     onChange={handleInputChange}
                     onKeyPress={handleKeyPress}
+                    data-aos="fade-in"
                   />
                   {step === "name" && nameError && <p className="error-message">{nameError}</p>}
                   {step === "location" && locationError && <p className="error-message">{locationError}</p>}
@@ -125,9 +140,9 @@ function Intro () {
           </div>
         </>
       )}
-      <div className="navigation__bottom">
-        <Back />
-        {submissionSuccess && <Proceed />}
+      <div className="navigation__bottom" data-aos="fade-in">
+        <Back data-aos="fade-in"/> 
+        {submissionSuccess && <Proceed data-aos="fade-in" />} 
       </div>
     </>
   );

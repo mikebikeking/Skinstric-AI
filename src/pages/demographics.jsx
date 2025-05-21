@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Nav from "../components/secondNav";
 import Back from "../components/back";
 import Home from "../components/home";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 function Demographics() {
   const [apiData, setApiData] = useState(null);
@@ -21,6 +23,14 @@ function Demographics() {
   const [graphLabel, setGraphLabel] = useState("Race");
   const [highlightedItem, setHighlightedItem] = useState(null);
   const [capturedImage, setCapturedImage] = useState(null);
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, 
+      once: true, 
+    });
+  }, []);
+
   useEffect(() => {
     const storedData = localStorage.getItem("skinstricApiResponse");
     if (storedData) {
@@ -91,6 +101,7 @@ function Demographics() {
       setTopProbability(Object.values(GenderProbabilities)[0] * 100);
     }
     setHighlightedItem(null);
+    AOS.refresh(); 
   }, [activeButton, RaceProbabilities, AgeProbabilities, GenderProbabilities]);
 
   const handleButtonClick = (buttonName) => {
@@ -139,19 +150,22 @@ function Demographics() {
       <div
         className="dem__header"
         style={{ textAlign: "left", fontSize: "1.1em" }}
+        data-aos="fade-in"
       >
         <h2>A.I. Analysis</h2>
-        <h1>DEMOGRAPHICS</h1>
-        <p>{predictionLabel}</p>
+        <h1 data-aos="fade-in" data-aos-delay="100">DEMOGRAPHICS</h1>
+        <p data-aos="fade-in" data-aos-delay="200">{predictionLabel}</p>
       </div>
 
-      <div className="dem__container">
+      <div className="dem__container" data-aos="fade-in" data-aos-delay="300">
         <div className="dem__button">
           <button
             className={`dem__buttons ${
               activeButton === "race" ? "active" : ""
             }`}
             onClick={() => handleButtonClick("race")}
+            data-aos="fade-in"
+            data-aos-delay="400"
           >
             <div
               style={{
@@ -174,6 +188,8 @@ function Demographics() {
           <button
             className={`dem__buttons ${activeButton === "age" ? "active" : ""}`}
             onClick={() => handleButtonClick("age")}
+            data-aos="fade-in"
+            data-aos-delay="500"
           >
             <div
               style={{
@@ -196,6 +212,8 @@ function Demographics() {
               activeButton === "gender" ? "active" : ""
             }`}
             onClick={() => handleButtonClick("gender")}
+            data-aos="fade-in"
+            data-aos-delay="600"
           >
             <div
               style={{
@@ -215,7 +233,7 @@ function Demographics() {
           </button>
         </div>
 
-        <div className="dem__graph">
+        <div className="dem__graph" data-aos="fade-in" data-aos-delay="700">
           <div className="graph__container">
             <div className="circular__progress--card">
               <div className="circular__progress--wrapper">
@@ -247,7 +265,6 @@ function Demographics() {
                   <p className="percentage">{topProbability.toFixed(0)}%</p>
                 </div>
               </div>
-              <p className="label__primary">{graphLabel}</p>
             </div>
           </div>
           <div className="graph__text">
@@ -255,7 +272,7 @@ function Demographics() {
           </div>
         </div>
 
-        <div className="dem__percent">
+        <div className="dem__percent" data-aos="fade-in" data-aos-delay="800">
           <div className="confidence__label--header">{confidenceLabel}</div>
           <ul className="percent__data">
             {activeButton === "race" &&
@@ -275,6 +292,8 @@ function Demographics() {
                     onClick={() =>
                       handleConfidenceClick(race, probability, "race")
                     }
+                    data-aos="fade-in"
+                    data-aos-delay={`${100 + Object.keys(RaceProbabilities).indexOf(race) * 100}`}
                   >
                     <span
                       style={{
@@ -306,6 +325,8 @@ function Demographics() {
                     onClick={() =>
                       handleConfidenceClick(age, probability, "age")
                     }
+                    data-aos="fade-in"
+                    data-aos-delay={`${100 + Object.keys(AgeProbabilities).indexOf(age) * 100}`}
                   >
                     <span
                       style={{
@@ -337,6 +358,8 @@ function Demographics() {
                     onClick={() =>
                       handleConfidenceClick(gender, probability, "gender")
                     }
+                    data-aos="fade-in"
+                    data-aos-delay={`${100 + Object.keys(GenderProbabilities).indexOf(gender) * 100}`}
                   >
                     <span
                       style={{
@@ -354,7 +377,7 @@ function Demographics() {
           </ul>
         </div>
       </div>
-      <div className="navigation__bottom">
+      <div className="navigation__bottom" data-aos="fade-in" data-aos-delay="1000">
         <Back />
         <Home />
       </div>

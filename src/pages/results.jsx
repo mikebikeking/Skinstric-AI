@@ -5,11 +5,19 @@ import Nav from "../components/nav";
 import Back from "../components/back";
 import Proceedapi from "../components/proceedapi";
 import { useNavigate } from "react-router-dom";
+import AOS from 'aos';
+import 'aos/dist/aos.css'; 
 
 function CameraPage() {
   const videoRef = useRef(null);
 
   useEffect(() => {
+    AOS.init({
+      duration: 1000, 
+      once: true, 
+      offset: 0, 
+    });
+
     async function enableCamera() {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({
@@ -34,7 +42,7 @@ function CameraPage() {
   }, []);
 
   return (
-    <div>
+    <div data-aos="fade-in">
       <Nav />
       <h2>Camera View</h2>
       <video ref={videoRef} width="400" height="300" autoPlay />{" "}
@@ -44,6 +52,17 @@ function CameraPage() {
 
 function Results() {
   const navigate = useNavigate();
+  const fileInputRef = useRef(null);
+  const [base64Image, setBase64Image] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, 
+      once: true, 
+      offset: 0, 
+    });
+  }, []);
 
   const handleShutterClick = async () => {
     try {
@@ -55,10 +74,6 @@ function Results() {
       alert("Camera access denied. Please check your browser permissions.");
     }
   };
-
-  const fileInputRef = useRef(null);
-  const [base64Image, setBase64Image] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
 
   const handleGalleryClick = () => {
     fileInputRef.current.click();
@@ -122,15 +137,18 @@ function Results() {
 
   return (
     <>
-      <Nav /> <p className="bold nav__p">To Start Analysis</p>{" "}
-      <div className="ai__home">
-        Allow A.I. to scan your face{" "}
+      <Nav data-aos="fade-in" />
+      <p className="bold nav__p" data-aos="fade-in">To Start Analysis</p>
+      <div className="ai__home" data-aos="fade-in">
+        Allow A.I. to scan your face
         <img
           src={shutter}
           className="shutter"
           alt="Shutter"
           onClick={handleShutterClick}
           style={{ cursor: "pointer" }}
+          data-aos="fade-in"
+          data-aos-delay="100" 
         />{" "}
         <img
           src={gallery}
@@ -138,11 +156,13 @@ function Results() {
           alt="Camera"
           onClick={handleGalleryClick}
           style={{ cursor: "pointer" }}
+          data-aos="fade-in"
+          data-aos-delay="200"
         />
-        Allow A.I. access to gallery{" "}
+        Allow A.I. access to gallery
       </div>{" "}
       {base64Image && (
-        <div>
+        <div data-aos="fade-in">
           {" "}
           <img
             src={base64Image}
@@ -152,12 +172,13 @@ function Results() {
         </div>
       )}{" "}
       {isLoading && (
-        <div className="loading-overlay">
+        <div className="loading-overlay" data-aos="fade-in">
           <div className="loading-text">Loading...</div>{" "}
         </div>
       )}{" "}
-      <div className="navigation__bottom">
-        <Back /> {base64Image && <Proceedapi onClick={handleProceedClick} />}{" "}
+      <div className="navigation__bottom" data-aos="fade-in">
+        <Back data-aos="fade-in" data-aos-delay="100" />{" "}
+        {base64Image && <Proceedapi onClick={handleProceedClick} data-aos="fade-in" data-aos-delay="200" />}{" "}
       </div>{" "}
       <input
         type="file"

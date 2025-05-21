@@ -7,8 +7,8 @@ function Nav(){
     <div className="nav__header">
       <div className="nav__left">
         <Link to="/">
-        <h1 className="nav__title">SKINSTRIC</h1>
-        </Link>
+                <h1 className="nav__title">SKINSTRIC</h1>
+                </Link>
         <button className="nav__btn">[ INTRO ]</button>
       </div>
       <button className="nav__btn--code">ENTER CODE</button>
