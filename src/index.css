@@ -5,7 +5,6 @@
   padding: 0;
   box-sizing: border-box;
   text-decoration: none;
-  
 }
 
 .nav__header {
@@ -134,7 +133,6 @@
 .rectangle__left {
   justify-content: flex-end;
   padding-right: 20px;
-  
 }
 
 .rectangle__right {
@@ -183,9 +181,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  position: fixed;
-  right: 40%;
-  margin-top: 64px;
+  margin-top: 150px;
 }
 
 .input__text {
@@ -199,6 +195,7 @@
   line-height: 64px;
   font-weight: 400;
   text-align: center;
+  outline: none;
 }
 
 .intro__text {
@@ -231,6 +228,38 @@
   position: fixed;
   bottom: 0;
   left: 0;
+}
+
+.gallery {
+  border: 2px dashed grey; 
+  padding: 16px;
+  
+}
+
+.gallery__img {
+  border: 2px dashed grey; 
+  outline: 2px dashed grey; 
+  padding: 16px;
+  outline-offset: 16px;
+  display: block; 
+    transform: rotate(45deg);
+
+}
+
+.shutter {
+  border: 2px dashed grey; 
+  padding: 32px;
+  
+}
+
+.shutter__img {
+  border: 2px dashed grey; 
+  outline: 2px dashed grey; 
+  padding: 16px;
+  outline-offset: 16px;
+  display: block; 
+    transform: rotate(45deg);
+
 }
 
 .proceed__container {
@@ -267,7 +296,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 75vh;
   gap: 10%;
 }
 
@@ -566,12 +595,10 @@
   }
 
   .rectangle__left {
-    
     padding-right: 20px;
   }
 
   .rectangle__right {
-    
     padding-left: 20px;
   }
 }
@@ -615,14 +642,13 @@
   }
 }
 
-
 @media (max-width: 768px) {
   .rectangle__intro {
     width: 80%;
     height: auto;
     aspect-ratio: 1 / 1;
-    left: 50%; 
-    transform: translateX(-50%) translateY(-50%) rotate(45deg); 
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%) rotate(45deg);
   }
 
   .input__text {
@@ -638,8 +664,8 @@
 @media (max-width: 576px) {
   .rectangle__intro {
     width: 90%;
-    left: 50%; 
-    transform: translateX(-50%) translateY(-50%) rotate(45deg); 
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%) rotate(45deg);
   }
 
   .input__text {
@@ -656,19 +682,17 @@
   .dem__container {
     display: flex;
     flex-direction: column;
-    align-items: center; 
+    align-items: center;
   }
 
- 
   .dem__button,
   .dem__graph,
   .dem__percent {
-    margin: 12px 0; 
-    width: 80%;     
-    max-width: 600px; 
+    margin: 12px 0;
+    width: 80%;
+    max-width: 600px;
   }
 
-  
   .dem__button {
     display: flex;
     flex-direction: column;
@@ -676,7 +700,7 @@
   }
 
   .dem__buttons {
-    width: 100%; 
-    margin: 6px 0; 
+    width: 100%;
+    margin: 6px 0;
   }
 }

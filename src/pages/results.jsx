@@ -141,6 +141,8 @@ function Results() {
       <p className="bold nav__p" data-aos="fade-in">To Start Analysis</p>
       <div className="ai__home" data-aos="fade-in">
         Allow A.I. to scan your face
+        <div className="shutter__img">
+
         <img
           src={shutter}
           className="shutter"
@@ -149,7 +151,10 @@ function Results() {
           style={{ cursor: "pointer" }}
           data-aos="fade-in"
           data-aos-delay="100" 
-        />{" "}
+          />{" "}
+          </div>
+        <div className="gallery__img">
+
         <img
           src={gallery}
           className="gallery"
@@ -158,7 +163,8 @@ function Results() {
           style={{ cursor: "pointer" }}
           data-aos="fade-in"
           data-aos-delay="200"
-        />
+          />
+          </div>
         Allow A.I. access to gallery
       </div>{" "}
       {base64Image && (
