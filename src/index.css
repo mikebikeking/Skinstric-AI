@@ -56,6 +56,19 @@
   cursor: pointer;
 }
 
+.nav__btn--reset {
+  color: black;
+  background-color: white;
+  padding: 8px 16px;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: -2%;
+  cursor: not-allowed;
+ outline: 1px black;
+ border-radius: 1px;
+}
+
 .landing {
   display: flex;
   justify-content: space-around;
@@ -118,16 +131,19 @@
   max-width: 400px;
 }
 
-.rectangle__left,
-.rectangle__right {
-  width: 250px;
-  height: 250px;
+  .rectangle__left,
+  .rectangle__right {
+    width: 550px;
+    height: 550px;
+    border: 2px dashed #a0a4ab;
+    transform: rotate(45deg);
+    display: flex;
+    position: relative;
+  }
+
+.rectangle__border {
   border: 2px dashed #a0a4ab;
-  transform: rotate(45deg);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
+  padding: 64px;
 }
 
 .rectangle__left {
@@ -231,35 +247,31 @@
 }
 
 .gallery {
-  border: 2px dashed grey; 
+  border: 2px dashed grey;
   padding: 16px;
-  
 }
 
 .gallery__img {
-  border: 2px dashed grey; 
-  outline: 2px dashed grey; 
+  border: 2px dashed rgba(160, 164, 171, 0.6);
+  outline: 2px dashed rgba(160, 164, 171, 0.3);
   padding: 16px;
   outline-offset: 16px;
-  display: block; 
-    transform: rotate(45deg);
-
+  display: block;
+  transform: rotate(45deg);
 }
 
 .shutter {
-  border: 2px dashed grey; 
-  padding: 32px;
-  
+  border: 2px dashed grey;
+  padding: 36px;
 }
 
 .shutter__img {
-  border: 2px dashed grey; 
-  outline: 2px dashed grey; 
+  border: 2px dashed rgba(160, 164, 171, 0.6);
+  outline: 2px dashed rgba(160, 164, 171, 0.3);
   padding: 16px;
   outline-offset: 16px;
-  display: block; 
-    transform: rotate(45deg);
-
+  display: block;
+  transform: rotate(45deg);
 }
 
 .proceed__container {
@@ -383,23 +395,18 @@
   justify-content: center;
 }
 
-.dem__button {
-  display: flex;
-  flex-direction: column;
-  background-color: rgb(243, 244, 246);
-  padding: 36px;
-  margin: 12px;
-  border-radius: 12px;
-}
+
 
 .dem__buttons {
   display: flex;
   flex-direction: column;
+  width: 208px;
+  height: 104px;
   gap: 10px;
   align-items: center;
   background-color: rgb(243, 244, 246);
   padding: 16px;
-  border-radius: 12px;
+  border: none;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
@@ -417,29 +424,41 @@
   display: flex;
   flex-direction: column;
   justify-content: left;
+  align-items: left;
 }
 
 .dem__graph {
   padding: 36px;
   background-color: rgb(243, 244, 246);
-  border-radius: 12px;
   margin: 12px;
   text-transform: capitalize;
 }
 
+
+
+.graph__title {
+  font-size: 40px;
+ font-weight: 400;
+ line-height: 40px;
+ letter-spacing: -5%;
+}
+
 .graph__text {
+  display: flex;
+  justify-content: center;
   align-items: end;
   color: #a0a4ab;
 }
 
 .circular__progress--card {
   background-color: #f3f4f6;
+  width: 1168px;
+  height: 544px;
   padding: 16px;
-  border-radius: 8px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-end;
+  justify-content: end;
 }
 
 .circular__progress--wrapper {
@@ -462,6 +481,8 @@
 .circular__progress--bar {
   color: #000;
 }
+
+
 
 .circular__progress--text {
   position: absolute;
@@ -491,11 +512,12 @@
 
 .dem__percent {
   padding: 36px;
+  width: 448px;
+  height: 650px;
   background-color: rgb(243, 244, 246);
-  border-radius: 12px;
+  border-top: #000 12px;
   margin: 12px;
   text-transform: capitalize;
-  word-spacing: 15px;
   flex-basis: 20%;
 }
 
@@ -505,16 +527,13 @@
   margin-bottom: 5px;
 }
 
-.dem__percent > ul.percent__data {
-  word-spacing: normal;
-}
+
 
 .confidence__label--header {
   font-weight: bold;
   display: flex;
   justify-content: space-around;
   margin-bottom: 8px;
-  word-spacing: px;
 }
 
 .confidence__label--header {
@@ -522,18 +541,13 @@
   margin-bottom: 5px;
 }
 
-.percent__data {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
 
 .percent__data li {
   display: flex;
   justify-content: space-between;
   cursor: pointer;
+  padding-left: 1.5em; 
 }
-
 .percent__data li span:last-child {
   margin-left: 20px;
 }
@@ -584,22 +598,24 @@
 
   .rectangle__left,
   .rectangle__right {
-    width: 250px;
-    height: 250px;
+    width: 550px;
+    height: 550px;
     border: 2px dashed #a0a4ab;
     transform: rotate(45deg);
     display: flex;
-    justify-content: center;
-    align-items: center;
     position: relative;
   }
 
   .rectangle__left {
-    padding-right: 20px;
+    padding-right: 75px;
+    padding-bottom: 250px;
+    left: -350px;
   }
 
   .rectangle__right {
-    padding-left: 20px;
+    padding-left: 75px;
+    padding-top: 250px;
+    left: 350px;
   }
 }
 
@@ -639,6 +655,15 @@
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+  }
+
+    .dem__button,
+  .dem__graph,
+  .dem__percent,
+  .circular__progress--card {
+    margin: 12px 12px;
+    width: 80%;
+    max-width: 600px;
   }
 }
 
@@ -687,7 +712,8 @@
 
   .dem__button,
   .dem__graph,
-  .dem__percent {
+  .dem__percent,
+  .circular__progress--card {
     margin: 12px 0;
     width: 80%;
     max-width: 600px;

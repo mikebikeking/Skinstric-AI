@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import Nav from "../components/secondNav";
 import Back from "../components/back";
 import Home from "../components/home";
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function Demographics() {
   const [apiData, setApiData] = useState(null);
@@ -26,8 +26,8 @@ function Demographics() {
 
   useEffect(() => {
     AOS.init({
-      duration: 1000, 
-      once: true, 
+      duration: 1000,
+      once: true,
     });
   }, []);
 
@@ -101,11 +101,22 @@ function Demographics() {
       setTopProbability(Object.values(GenderProbabilities)[0] * 100);
     }
     setHighlightedItem(null);
-    AOS.refresh(); 
+    AOS.refresh();
   }, [activeButton, RaceProbabilities, AgeProbabilities, GenderProbabilities]);
 
   const handleButtonClick = (buttonName) => {
     setActiveButton(buttonName);
+  };
+
+  const getGraphData = () => {
+    if (activeButton === "race" && RaceProbabilities) {
+      return Object.keys(RaceProbabilities)[0] || "Race";
+    } else if (activeButton === "age" && AgeRange) {
+      return AgeRange || "Age";
+    } else if (activeButton === "gender" && GenderRange) {
+      return GenderRange || "Gender";
+    }
+    return "";
   };
 
   const handleConfidenceClick = (item, newProbability, type) => {
@@ -153,8 +164,12 @@ function Demographics() {
         data-aos="fade-in"
       >
         <h2>A.I. Analysis</h2>
-        <h1 data-aos="fade-in" data-aos-delay="100">DEMOGRAPHICS</h1>
-        <p data-aos="fade-in" data-aos-delay="200">{predictionLabel}</p>
+        <h1 data-aos="fade-in" data-aos-delay="100">
+          DEMOGRAPHICS
+        </h1>
+        <p data-aos="fade-in" data-aos-delay="200">
+          {predictionLabel}
+        </p>
       </div>
 
       <div className="dem__container" data-aos="fade-in" data-aos-delay="300">
@@ -235,22 +250,27 @@ function Demographics() {
 
         <div className="dem__graph" data-aos="fade-in" data-aos-delay="700">
           <div className="graph__container">
+            <div className="graph__title">
+              <p data-aos="fade-in" data-aos-delay="200">
+                {getGraphData()}
+              </p>
+            </div>
             <div className="circular__progress--card">
               <div className="circular__progress--wrapper">
                 <svg className="circular__progress--svg" viewBox="0 0 100 100">
                   <circle
                     cx="50"
                     cy="50"
-                    r="40"
+                    r="45"
                     className="circular__progress--bg"
                     stroke="currentColor"
-                    strokeWidth="6"
+                    strokeWidth="1"
                     fill="transparent"
                   ></circle>
                   <circle
                     className="circular__progress--bar"
                     stroke="currentColor"
-                    strokeWidth="6"
+                    strokeWidth="1"
                     fill="transparent"
                     strokeLinecap="round"
                     strokeDasharray="250"
@@ -258,7 +278,7 @@ function Demographics() {
                     transform="rotate(-90 50 50)"
                     cx="50"
                     cy="50"
-                    r="40"
+                    r="45"
                   ></circle>
                 </svg>
                 <div className="circular__progress--text">
@@ -267,14 +287,11 @@ function Demographics() {
               </div>
             </div>
           </div>
-          <div className="graph__text">
-            <p>If A.I. estimate is wrong, select the correct one.</p>
-          </div>
         </div>
 
         <div className="dem__percent" data-aos="fade-in" data-aos-delay="800">
           <div className="confidence__label--header">{confidenceLabel}</div>
-          <ul className="percent__data">
+          <ul className="percent__data" style={{ listStyleType: 'disc' }}>
             {activeButton === "race" &&
               RaceProbabilities &&
               Object.entries(RaceProbabilities)
@@ -293,7 +310,9 @@ function Demographics() {
                       handleConfidenceClick(race, probability, "race")
                     }
                     data-aos="fade-in"
-                    data-aos-delay={`${100 + Object.keys(RaceProbabilities).indexOf(race) * 100}`}
+                    data-aos-delay={`${
+                      100 + Object.keys(RaceProbabilities).indexOf(race) * 100
+                    }`}
                   >
                     <span
                       style={{
@@ -326,7 +345,9 @@ function Demographics() {
                       handleConfidenceClick(age, probability, "age")
                     }
                     data-aos="fade-in"
-                    data-aos-delay={`${100 + Object.keys(AgeProbabilities).indexOf(age) * 100}`}
+                    data-aos-delay={`${
+                      100 + Object.keys(AgeProbabilities).indexOf(age) * 100
+                    }`}
                   >
                     <span
                       style={{
@@ -359,7 +380,10 @@ function Demographics() {
                       handleConfidenceClick(gender, probability, "gender")
                     }
                     data-aos="fade-in"
-                    data-aos-delay={`${100 + Object.keys(GenderProbabilities).indexOf(gender) * 100}`}
+                    data-aos-delay={`${
+                      100 +
+                      Object.keys(GenderProbabilities).indexOf(gender) * 100
+                    }`}
                   >
                     <span
                       style={{
@@ -377,9 +401,28 @@ function Demographics() {
           </ul>
         </div>
       </div>
-      <div className="navigation__bottom" data-aos="fade-in" data-aos-delay="1000">
+      <div className="graph__text">
+        <p>If A.I. estimate is wrong, select the correct one.</p>
+      </div>
+      <div
+        className="navigation__bottom"
+        data-aos="fade-in"
+        data-aos-delay="1000"
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          alignItems: "center",
+          padding: "20px 32px",
+        }}
+      >
         <Back />
-        <Home />
+        <div style={{ flexGrow: 1 }}></div>
+        <button className="nav__btn--reset" style={{ marginLeft: "10px" }}>
+          RESET
+        </button>
+        <button className="nav__btn--confirm" style={{ marginLeft: "10px" }}>
+          CONFIRM
+        </button>
       </div>
     </>
   );

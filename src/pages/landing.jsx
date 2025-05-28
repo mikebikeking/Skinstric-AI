@@ -3,11 +3,10 @@ import { Link } from "react-router-dom";
 import buttonIcon from "../assets/button-icon-shrunk.png";
 import buttonIconFlip from "../assets/button-icon-shrunk-flip.png";
 import Nav from "../components/nav";
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import AOS from "aos";
+import "aos/dist/aos.css";
 
-
-function Landing () {
+function Landing() {
   useEffect(() => {
     AOS.init({
       duration: 800,
@@ -34,7 +33,12 @@ function Landing () {
           Sophisticated
           <br /> skincare
         </h1>
-        <Link to="/analysis" className="small__button" data-aos="fade-up" data-aos-delay="300">
+        <Link
+          to="/analysis"
+          className="small__button"
+          data-aos="fade-up"
+          data-aos-delay="300"
+        >
           Get Started
         </Link>
         <div className="rectangle__right">
@@ -42,12 +46,17 @@ function Landing () {
             <Link to="/analysis" className="lan__btn">
               <span>
                 Take Test
-                <img src={buttonIconFlip} className="btn__icon" alt="Take Test" />
+                <img
+                  src={buttonIconFlip}
+                  className="btn__icon"
+                  alt="Take Test"
+                />
               </span>
             </Link>
           </div>
         </div>
       </div>
+
       <div data-aos="fade-up" data-aos-delay="300">
         <p className="landing__text">
           SKINSTRIC DEVELOPED AN A.I. THAT CREATES A HIGHLY-PERSONALISED ROUTINE
@@ -56,6 +65,6 @@ function Landing () {
       </div>
     </>
   );
-};
+}
 
 export default Landing;
