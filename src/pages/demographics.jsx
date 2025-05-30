@@ -291,40 +291,44 @@ function Demographics() {
 
         <div className="dem__percent" data-aos="fade-in" data-aos-delay="800">
           <div className="confidence__label--header">{confidenceLabel}</div>
-          <ul className="percent__data" style={{ listStyleType: 'disc' }}>
+          <ul className="percent__data" style={{ listStyleType: "disc" }}>
             {activeButton === "race" &&
               RaceProbabilities &&
               Object.entries(RaceProbabilities)
                 .sort(([, probA], [, probB]) => probB - probA)
                 .map(([race, probability]) => (
-                  <li
-                    key={race}
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      cursor: "pointer",
-                      fontWeight: highlightedItem === race ? "bold" : "normal",
-                      color: highlightedItem === race ? "black" : "inherit",
-                    }}
-                    onClick={() =>
-                      handleConfidenceClick(race, probability, "race")
-                    }
-                    data-aos="fade-in"
-                    data-aos-delay={`${
-                      100 + Object.keys(RaceProbabilities).indexOf(race) * 100
-                    }`}
-                  >
-                    <span
+                  <li key={race}>
+                    <div
                       style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        cursor: "pointer",
                         fontWeight:
                           highlightedItem === race ? "bold" : "normal",
+                        color: highlightedItem === race ? "black" : "inherit",
+                        width: "100%",
                       }}
+                      onClick={() =>
+                        handleConfidenceClick(race, probability, "race")
+                      }
+                      data-aos="fade-in"
+                      data-aos-delay={`${
+                        100 + Object.keys(RaceProbabilities).indexOf(race) * 100
+                      }`}
                     >
-                      {race}
-                    </span>
-                    <span style={{ marginLeft: "20px" }}>
-                      {(probability * 100).toFixed(2)}%
-                    </span>
+                      <span
+                        style={{
+                          fontWeight:
+                            highlightedItem === race ? "bold" : "normal",
+                        }}
+                      >
+                        {race}
+                      </span>
+                      <span style={{ marginLeft: "20px" }}>
+                        {(probability * 100).toFixed(2)}%
+                      </span>
+                    </div>
                   </li>
                 ))}
             {activeButton === "age" &&
@@ -332,15 +336,18 @@ function Demographics() {
               Object.entries(AgeProbabilities)
                 .sort(([, probA], [, probB]) => probB - probA)
                 .map(([age, probability]) => (
-                  <li
-                    key={age}
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      cursor: "pointer",
-                      fontWeight: highlightedItem === age ? "bold" : "normal",
-                      color: highlightedItem === age ? "black" : "inherit",
-                    }}
+                  <li key={age}>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        cursor: "pointer",
+                        fontWeight:
+                          highlightedItem === age ? "bold" : "normal",
+                        color: highlightedItem === age ? "black" : "inherit",
+                        width: "100%",
+                      }}
                     onClick={() =>
                       handleConfidenceClick(age, probability, "age")
                     }
@@ -351,7 +358,7 @@ function Demographics() {
                   >
                     <span
                       style={{
-                        fontWeight: highlightedItem === age ? "bold" : "normal",
+                        fontWeight: highlightedItem === age  ? "bold" : "normal",
                       }}
                     >
                       {age}
@@ -359,6 +366,7 @@ function Demographics() {
                     <span style={{ marginLeft: "20px" }}>
                       {(probability * 100).toFixed(2)}%
                     </span>
+                    </div>
                   </li>
                 ))}
             {activeButton === "gender" &&
@@ -366,16 +374,19 @@ function Demographics() {
               Object.entries(GenderProbabilities)
                 .sort(([, probA], [, probB]) => probB - probA)
                 .map(([gender, probability]) => (
-                  <li
-                    key={gender}
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      cursor: "pointer",
-                      fontWeight:
-                        highlightedItem === gender ? "bold" : "normal",
-                      color: highlightedItem === gender ? "black" : "inherit",
-                    }}
+                  <li key={gender}>
+                  <div 
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        cursor: "pointer",
+                        fontWeight:
+                          highlightedItem === gender ? "bold" : "normal",
+                        color: highlightedItem === gender ? "black" : "inherit",
+                        width: "100%",
+                        
+                      }}
                     onClick={() =>
                       handleConfidenceClick(gender, probability, "gender")
                     }
@@ -396,13 +407,16 @@ function Demographics() {
                     <span style={{ marginLeft: "20px" }}>
                       {(probability * 100).toFixed(2)}%
                     </span>
+                    </div>
                   </li>
                 ))}
           </ul>
         </div>
       </div>
       <div className="graph__text">
-        <p>If A.I. estimate is wrong, select the correct one.</p>
+        <p data-aos="fade-in" data-aos-delay="1000">
+          If A.I. estimate is wrong, select the correct one.
+        </p>
       </div>
       <div
         className="navigation__bottom"

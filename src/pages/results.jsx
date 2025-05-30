@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import gallery from "../assets/gallery-icon.png";
 import shutter from "../assets/shutter-icon.png";
-import Nav from "../components/nav";
+import Nav from "../components/secondNav";
 import Back from "../components/back";
 import Proceedapi from "../components/proceedapi";
 import { useNavigate } from "react-router-dom";
@@ -140,8 +140,7 @@ function Results() {
       <Nav data-aos="fade-in" />
       <p className="bold nav__p" data-aos="fade-in">To Start Analysis</p>
       <div className="ai__home" data-aos="fade-in">
-        Allow A.I. to scan your face
-        <div className="shutter__img">
+       
 
         <img
           src={shutter}
@@ -152,8 +151,7 @@ function Results() {
           data-aos="fade-in"
           data-aos-delay="100" 
           />{" "}
-          </div>
-        <div className="gallery__img">
+         
 
         <img
           src={gallery}
@@ -164,8 +162,7 @@ function Results() {
           data-aos="fade-in"
           data-aos-delay="200"
           />
-          </div>
-        Allow A.I. access to gallery
+        
       </div>{" "}
       {base64Image && (
         <div data-aos="fade-in">
@@ -184,7 +181,7 @@ function Results() {
       )}{" "}
       <div className="navigation__bottom" data-aos="fade-in">
         <Back data-aos="fade-in" data-aos-delay="100" />{" "}
-        {base64Image && <Proceedapi onClick={handleProceedClick} data-aos="fade-in" data-aos-delay="200" />}{" "}
+        {base64Image && <Proceedapi onClick={handleProceedClick} data-aos="fade-in" data-aos-delay="300" />}{" "}
       </div>{" "}
       <input
         type="file"

@@ -246,10 +246,7 @@
   left: 0;
 }
 
-.gallery {
-  border: 2px dashed grey;
-  padding: 16px;
-}
+
 
 .gallery__img {
   border: 2px dashed rgba(160, 164, 171, 0.6);
@@ -260,10 +257,7 @@
   transform: rotate(45deg);
 }
 
-.shutter {
-  border: 2px dashed grey;
-  padding: 36px;
-}
+
 
 .shutter__img {
   border: 2px dashed rgba(160, 164, 171, 0.6);
@@ -543,11 +537,20 @@
 
 
 .percent__data li {
-  display: flex;
   justify-content: space-between;
   cursor: pointer;
   padding-left: 1.5em; 
+  list-style-type: disc; 
 }
+.percent__data {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  list-style: disc; 
+}
+
+
+
 .percent__data li span:last-child {
   margin-left: 20px;
 }
