@@ -79,7 +79,7 @@ function Demographics() {
     if (storedImage) {
       setCapturedImage(storedImage);
     }
-  }, [activeButton]);
+  }, []);
 
   useEffect(() => {
     if (activeButton === "race" && RaceProbabilities) {
@@ -87,32 +87,47 @@ function Demographics() {
       setPredictionLabel("Predicted Race");
       setGraphLabel("Race");
       setTopProbability(Object.values(RaceProbabilities)[0] * 100);
+      setHighlightedItem(Object.keys(RaceProbabilities)[0]);
     } else if (activeButton === "age" && AgeProbabilities) {
       setConfidenceLabelDynamic("Age");
       setPredictionLabel("Predicted Age");
       setGraphLabel("Age");
       setTopProbability(Object.values(AgeProbabilities)[0] * 100);
+      setHighlightedItem(Object.keys(AgeProbabilities)[0]);
     } else if (activeButton === "gender" && GenderProbabilities) {
       setConfidenceLabelDynamic("Gender");
       setPredictionLabel("Predicted Gender");
       setGraphLabel("Gender");
       setTopProbability(Object.values(GenderProbabilities)[0] * 100);
+      setHighlightedItem(Object.keys(GenderProbabilities)[0]);
     }
-    setHighlightedItem(null);
     AOS.refresh();
   }, [activeButton, RaceProbabilities, AgeProbabilities, GenderProbabilities]);
 
   const handleButtonClick = (buttonName) => {
     setActiveButton(buttonName);
+    if (buttonName === "race" && RaceProbabilities) {
+        setHighlightedItem(Object.keys(RaceProbabilities)[0]);
+    } else if (buttonName === "age" && AgeProbabilities) {
+        setHighlightedItem(Object.keys(AgeProbabilities)[0]);
+    } else if (buttonName === "gender" && GenderProbabilities) {
+        setHighlightedItem(Object.keys(GenderProbabilities)[0]);
+    }
   };
 
   const getGraphData = () => {
     if (activeButton === "race" && RaceProbabilities) {
-      return Object.keys(RaceProbabilities)[0] || "Race";
+      return highlightedItem && activeButton === "race"
+        ? highlightedItem
+        : Object.keys(RaceProbabilities)[0] || "Race";
     } else if (activeButton === "age" && AgeRange) {
-      return `${AgeRange} y.o.`;
+      return highlightedItem && activeButton === "age"
+        ? `${highlightedItem} y.o.`
+        : `${AgeRange} y.o.`;
     } else if (activeButton === "gender" && GenderRange) {
-      return GenderRange || "Gender";
+      return highlightedItem && activeButton === "gender"
+        ? highlightedItem
+        : GenderRange || "Gender";
     }
     return "";
   };
@@ -123,30 +138,14 @@ function Demographics() {
     setTopProbability(newProbability * 100);
     setHighlightedItem(item);
 
-    if (type === "race" && RaceProbabilities) {
+    if (type === "race") {
       setPredictionLabel("Predicted Race");
       setConfidenceLabelDynamic("Race");
-      const newRaceProbabilities = {
-        [item]: newProbability,
-        ...RaceProbabilities,
-      };
-      if (
-        newRaceProbabilities[Object.keys(RaceProbabilities)[0]] ===
-          newProbability &&
-        Object.keys(newRaceProbabilities)[0] !== item
-      ) {
-        delete newRaceProbabilities[
-          Object.keys(RaceProbabilities)[
-            Object.keys(newRaceProbabilities).indexOf(item)
-          ]
-        ];
-      }
-      setRaceProbabilities(newRaceProbabilities);
-    } else if (type === "age" && AgeProbabilities) {
+    } else if (type === "age") {
       setPredictionLabel("Predicted Age");
       setConfidenceLabelDynamic("Age");
       setAgeRange(item);
-    } else if (type === "gender" && GenderProbabilities) {
+    } else if (type === "gender") {
       setPredictionLabel("Predicted Gender");
       setConfidenceLabelDynamic("Gender");
       setGenderRange(item);
@@ -312,8 +311,7 @@ function Demographics() {
                         justifyContent: "space-between",
                         alignItems: "center",
                         cursor: "pointer",
-                        fontWeight:
-                          highlightedItem === race ? "bold" : "normal",
+                        fontWeight: highlightedItem === race ? "bold" : "normal",
                         border:
                           highlightedItem === race ? "3px solid black" : "none",
                         backgroundColor:

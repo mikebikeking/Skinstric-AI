@@ -383,6 +383,9 @@
 .dem__container {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  padding: 20px;
 }
 
 .dem__buttons {
@@ -392,19 +395,25 @@
   height: 104px;
   gap: 10px;
   align-items: center;
+  text-align: left;
   background-color: rgb(243, 244, 246);
   padding: 16px;
-  border: none;
+  border-top: 1px solid black;
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
   margin: 12px;
   text-transform: uppercase;
   font-weight: bold;
+  flex-shrink: 0;
 }
 
 .dem__buttons.active {
   background-color: black;
+  text-align: left;
   color: white;
 }
 
@@ -412,7 +421,8 @@
   display: flex;
   flex-direction: column;
   justify-content: left;
-  align-items: left;
+  align-items: flex-start;
+  width: 100%;
 }
 
 .dem__graph {
@@ -420,6 +430,11 @@
   background-color: rgb(243, 244, 246);
   margin: 12px;
   text-transform: capitalize;
+  border-top: 1px solid black;
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+  flex-grow: 1;
 }
 
 .graph__title {
@@ -445,6 +460,8 @@
   flex-direction: column;
   align-items: flex-end;
   justify-content: end;
+  flex-grow: 1;
+  min-width: 300px;
 }
 
 .circular__progress--wrapper {
@@ -499,10 +516,15 @@
   width: 448px;
   height: 650px;
   background-color: rgb(243, 244, 246);
-  border-top: #000 12px;
+  border-top: 1px solid black;
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
   margin: 12px;
   text-transform: capitalize;
   flex-basis: 20%;
+  flex-grow: 1;
+  min-width: 300px;
 }
 
 .dem__percent-header {
@@ -618,6 +640,27 @@
     padding-top: 250px;
     left: 350px;
   }
+
+  .dem__container {
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+
+  .dem__buttons {
+    width: 208px;
+  }
+
+  .dem__graph,
+  .circular__progress--card {
+    width: auto;
+    min-width: 300px;
+  }
+
+ 
+
+  .dem__percent {
+    max-width: 448px;
+  }
 }
 
 @media (max-width: 1200px) {
@@ -658,13 +701,80 @@
     text-align: center;
   }
 
-  .dem__button,
+  .dem__container {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 15px;
+  }
+
+  .dem__buttons {
+    width: 150px;
+    margin: 8px;
+    height: auto;
+    padding: 10px;
+  }
+
+  .dem__graph,
+  .circular__progress--card {
+    width: 350px;
+    min-width: unset;
+    max-width: 350px;
+    margin: 8px;
+    height: auto;
+  }
+
+  .dem__percent {
+    width: 300px;
+    min-width: unset;
+    max-width: 300px;
+    margin: 8px;
+    height: auto;
+    padding: 20px;
+  }
+
+  .circular__progress--card {
+    width: 300px;
+    min-width: unset;
+    max-width: 300px;
+    margin: 8px;
+    height: auto;
+  }
+}
+
+@media (max-width: 999px) {
+  .dem__container {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    flex-wrap: wrap;
+  }
+
+  .dem__buttons,
   .dem__graph,
   .dem__percent,
   .circular__progress--card {
-    margin: 12px 12px;
-    width: 80%;
-    max-width: 600px;
+    margin: 10px 0;
+    width: 90%;
+    max-width: 500px;
+    box-sizing: border-box;
+    min-width: unset;
+  }
+
+  .dem__buttons {
+    height: auto;
+    padding: 12px;
+  }
+
+  .dem__graph,
+  .dem__percent,
+  .circular__progress--card {
+    height: auto;
+  }
+
+  .circular__progress--card {
+    width: 90%;
   }
 }
 
@@ -685,6 +795,29 @@
   .intro__text {
     font-size: 0.8em;
   }
+
+  .dem__header {
+    padding-left: 0;
+    text-align: center;
+    font-size: 20px;
+  }
+
+  .dem__container {
+    padding: 5px;
+  }
+
+  .dem__buttons,
+  .dem__graph,
+  .dem__percent,
+  .circular__progress--card {
+    width: 95%;
+    margin: 8px 0;
+  }
+
+  .graph__title {
+    font-size: 32px;
+    line-height: 36px;
+  }
 }
 
 @media (max-width: 576px) {
@@ -702,32 +835,23 @@
   .intro__text {
     font-size: 0.7em;
   }
-}
 
-@media (max-width: 999px) {
-  .dem__container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .dem__button,
-  .dem__graph,
-  .dem__percent,
-  .circular__progress--card {
-    margin: 12px 0;
-    width: 80%;
-    max-width: 600px;
-  }
-
-  .dem__button {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  .dem__header {
+    font-size: 18px;
   }
 
   .dem__buttons {
-    width: 100%;
-    margin: 6px 0;
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  .graph__title {
+    font-size: 28px;
+    line-height: 32px;
+  }
+
+  .dem__percent {
+    padding: 20px;
+    height: auto;
   }
 }
