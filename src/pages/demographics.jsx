@@ -14,9 +14,7 @@ function Demographics() {
   const [GenderProbabilities, setGenderProbabilities] = useState(null);
   const [topProbability, setTopProbability] = useState(0);
   const [activeButton, setActiveButton] = useState("race");
-  const [confidenceLabel, setConfidenceLabel] = useState(
-    "Race A.I. CONFIDENCE"
-  );
+  const [confidenceLabelDynamic, setConfidenceLabelDynamic] = useState("Race");
   const [predictionLabel, setPredictionLabel] = useState(
     "Predicted Race & Age"
   );
@@ -85,17 +83,17 @@ function Demographics() {
 
   useEffect(() => {
     if (activeButton === "race" && RaceProbabilities) {
-      setConfidenceLabel("Race A.I. CONFIDENCE");
+      setConfidenceLabelDynamic("Race");
       setPredictionLabel("Predicted Race");
       setGraphLabel("Race");
       setTopProbability(Object.values(RaceProbabilities)[0] * 100);
     } else if (activeButton === "age" && AgeProbabilities) {
-      setConfidenceLabel("Age A.I. CONFIDENCE");
+      setConfidenceLabelDynamic("Age");
       setPredictionLabel("Predicted Age");
       setGraphLabel("Age");
       setTopProbability(Object.values(AgeProbabilities)[0] * 100);
     } else if (activeButton === "gender" && GenderProbabilities) {
-      setConfidenceLabel("Gender A.I. CONFIDENCE");
+      setConfidenceLabelDynamic("Gender");
       setPredictionLabel("Predicted Gender");
       setGraphLabel("Gender");
       setTopProbability(Object.values(GenderProbabilities)[0] * 100);
@@ -112,7 +110,7 @@ function Demographics() {
     if (activeButton === "race" && RaceProbabilities) {
       return Object.keys(RaceProbabilities)[0] || "Race";
     } else if (activeButton === "age" && AgeRange) {
-      return AgeRange || "Age";
+      return `${AgeRange} y.o.`;
     } else if (activeButton === "gender" && GenderRange) {
       return GenderRange || "Gender";
     }
@@ -127,7 +125,7 @@ function Demographics() {
 
     if (type === "race" && RaceProbabilities) {
       setPredictionLabel("Predicted Race");
-      setConfidenceLabel("Race A.I. CONFIDENCE");
+      setConfidenceLabelDynamic("Race");
       const newRaceProbabilities = {
         [item]: newProbability,
         ...RaceProbabilities,
@@ -146,11 +144,11 @@ function Demographics() {
       setRaceProbabilities(newRaceProbabilities);
     } else if (type === "age" && AgeProbabilities) {
       setPredictionLabel("Predicted Age");
-      setConfidenceLabel("Age A.I. CONFIDENCE");
+      setConfidenceLabelDynamic("Age");
       setAgeRange(item);
     } else if (type === "gender" && GenderProbabilities) {
       setPredictionLabel("Predicted Gender");
-      setConfidenceLabel("Gender A.I. CONFIDENCE");
+      setConfidenceLabelDynamic("Gender");
       setGenderRange(item);
     }
   };
@@ -290,8 +288,18 @@ function Demographics() {
         </div>
 
         <div className="dem__percent" data-aos="fade-in" data-aos-delay="800">
-          <div className="confidence__label--header">{confidenceLabel}</div>
-          <ul className="percent__data" style={{ listStyleType: "disc" }}>
+          <div
+            className="confidence__label--header"
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              width: "100%",
+            }}
+          >
+            <span>{confidenceLabelDynamic}</span>
+            <span>A.I. CONFIDENCE</span>
+          </div>
+          <ul className="percent__data" style={{ listStyleType: "none" }}>
             {activeButton === "race" &&
               RaceProbabilities &&
               Object.entries(RaceProbabilities)
@@ -306,7 +314,11 @@ function Demographics() {
                         cursor: "pointer",
                         fontWeight:
                           highlightedItem === race ? "bold" : "normal",
-                        color: highlightedItem === race ? "black" : "inherit",
+                        border:
+                          highlightedItem === race ? "3px solid black" : "none",
+                        backgroundColor:
+                          highlightedItem === race ? "black" : "transparent",
+                        color: highlightedItem === race ? "white" : "inherit",
                         width: "100%",
                       }}
                       onClick={() =>
@@ -343,29 +355,33 @@ function Demographics() {
                         justifyContent: "space-between",
                         alignItems: "center",
                         cursor: "pointer",
-                        fontWeight:
-                          highlightedItem === age ? "bold" : "normal",
-                        color: highlightedItem === age ? "black" : "inherit",
+                        fontWeight: highlightedItem === age ? "bold" : "normal",
+                        border:
+                          highlightedItem === age ? "3px solid black" : "none",
+                        backgroundColor:
+                          highlightedItem === age ? "black" : "transparent",
+                        color: highlightedItem === age ? "white" : "inherit",
                         width: "100%",
                       }}
-                    onClick={() =>
-                      handleConfidenceClick(age, probability, "age")
-                    }
-                    data-aos="fade-in"
-                    data-aos-delay={`${
-                      100 + Object.keys(AgeProbabilities).indexOf(age) * 100
-                    }`}
-                  >
-                    <span
-                      style={{
-                        fontWeight: highlightedItem === age  ? "bold" : "normal",
-                      }}
+                      onClick={() =>
+                        handleConfidenceClick(age, probability, "age")
+                      }
+                      data-aos="fade-in"
+                      data-aos-delay={`${
+                        100 + Object.keys(AgeProbabilities).indexOf(age) * 100
+                      }`}
                     >
-                      {age}
-                    </span>
-                    <span style={{ marginLeft: "20px" }}>
-                      {(probability * 100).toFixed(2)}%
-                    </span>
+                      <span
+                        style={{
+                          fontWeight:
+                            highlightedItem === age ? "bold" : "normal",
+                        }}
+                      >
+                        {age}
+                      </span>
+                      <span style={{ marginLeft: "20px" }}>
+                        {(probability * 100).toFixed(2)}%
+                      </span>
                     </div>
                   </li>
                 ))}
@@ -375,7 +391,7 @@ function Demographics() {
                 .sort(([, probA], [, probB]) => probB - probA)
                 .map(([gender, probability]) => (
                   <li key={gender}>
-                  <div 
+                    <div
                       style={{
                         display: "flex",
                         justifyContent: "space-between",
@@ -383,30 +399,35 @@ function Demographics() {
                         cursor: "pointer",
                         fontWeight:
                           highlightedItem === gender ? "bold" : "normal",
-                        color: highlightedItem === gender ? "black" : "inherit",
+                        border:
+                          highlightedItem === gender
+                            ? "3px solid black"
+                            : "none",
+                        backgroundColor:
+                          highlightedItem === gender ? "black" : "transparent",
+                        color: highlightedItem === gender ? "white" : "inherit",
                         width: "100%",
-                        
                       }}
-                    onClick={() =>
-                      handleConfidenceClick(gender, probability, "gender")
-                    }
-                    data-aos="fade-in"
-                    data-aos-delay={`${
-                      100 +
-                      Object.keys(GenderProbabilities).indexOf(gender) * 100
-                    }`}
-                  >
-                    <span
-                      style={{
-                        fontWeight:
-                          highlightedItem === gender ? "bold" : "normal",
-                      }}
+                      onClick={() =>
+                        handleConfidenceClick(gender, probability, "gender")
+                      }
+                      data-aos="fade-in"
+                      data-aos-delay={`${
+                        100 +
+                        Object.keys(GenderProbabilities).indexOf(gender) * 100
+                      }`}
                     >
-                      {gender}
-                    </span>
-                    <span style={{ marginLeft: "20px" }}>
-                      {(probability * 100).toFixed(2)}%
-                    </span>
+                      <span
+                        style={{
+                          fontWeight:
+                            highlightedItem === gender ? "bold" : "normal",
+                        }}
+                      >
+                        {gender}
+                      </span>
+                      <span style={{ marginLeft: "20px" }}>
+                        {(probability * 100).toFixed(2)}%
+                      </span>
                     </div>
                   </li>
                 ))}
@@ -434,7 +455,7 @@ function Demographics() {
         <button className="nav__btn--reset" style={{ marginLeft: "10px" }}>
           RESET
         </button>
-        <button className="nav__btn--confirm" style={{ marginLeft: "10px" }}>
+        <button className="nav__btn--code" style={{ marginLeft: "10px" }}>
           CONFIRM
         </button>
       </div>
