@@ -11,11 +11,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 32px;
+  padding: 0px 32px;
 }
 
 .nav__p {
-  padding: 32px;
+  padding: 8px 32px 0px 32px;
 }
 
 .nav__left {
@@ -31,6 +31,7 @@
   letter-spacing: -0.02em;
   margin-right: 20px;
   cursor: pointer;
+  padding-top: 8px;
 }
 
 .nav__btn {
@@ -41,7 +42,7 @@
   letter-spacing: -0.02em;
   background-color: transparent;
   border: none;
-  padding: 0;
+  padding-top: 8px;
 }
 
 .nav__btn--code {
@@ -54,6 +55,7 @@
   letter-spacing: -2%;
   border: none;
   cursor: pointer;
+  padding-top: 8px;
 }
 
 .nav__btn--reset {
@@ -133,8 +135,8 @@
 
 .rectangle__left,
 .rectangle__right {
-  width: 550px;
-  height: 550px;
+  width: 500px;
+  height: 500px;
   border: 2px dashed #a0a4ab;
   transform: rotate(45deg);
   display: flex;
@@ -197,7 +199,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  margin-top: 150px;
+  margin-top: 105px;
 }
 
 .input__text {
@@ -605,7 +607,7 @@
   margin-top: 20px;
 }
 
-@media (min-width: 1201px) {
+ @media (min-width: 1201px) {
   .title {
     font-size: 90px;
     line-height: 90px;
@@ -616,13 +618,13 @@
   .landing {
     flex-wrap: nowrap;
     justify-content: space-between;
-    padding: 40px 60px;
+    padding: 0px 60px;
   }
 
   .rectangle__left,
   .rectangle__right {
-    width: 550px;
-    height: 550px;
+    width: 450px;
+    height: 450px;
     border: 2px dashed #a0a4ab;
     transform: rotate(45deg);
     display: flex;
@@ -631,13 +633,13 @@
 
   .rectangle__left {
     padding-right: 75px;
-    padding-bottom: 250px;
+    padding-bottom: 200px;
     left: -350px;
   }
 
   .rectangle__right {
     padding-left: 75px;
-    padding-top: 250px;
+    padding-top: 200px;
     left: 350px;
   }
 
@@ -661,7 +663,7 @@
   .dem__percent {
     max-width: 448px;
   }
-}
+} 
 
 @media (max-width: 1200px) {
   .title {
@@ -854,4 +856,4 @@
     padding: 20px;
     height: auto;
   }
-}
+} 

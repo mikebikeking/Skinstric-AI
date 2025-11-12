@@ -57,7 +57,7 @@ function Landing() {
         </div>
       </div>
 
-      <div data-aos="fade-up" data-aos-delay="300">
+      <div>
         <p className="landing__text">
           SKINSTRIC DEVELOPED AN A.I. THAT CREATES A HIGHLY-PERSONALISED ROUTINE
           TAILORED TO WHAT YOUR SKIN NEEDS.
